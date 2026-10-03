@@ -1,0 +1,14 @@
+{
+  "name": "motor-temperature-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard visual de mediciones de temperatura en motores",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  }
+}

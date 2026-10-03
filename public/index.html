@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard de monitoreo de temperatura en motores industriales en tiempo real. Visualiza métricas de rendimiento, alertas y tendencias.">
+  <title>Motor Temp Dashboard | Monitoreo en Tiempo Real</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌡️</text></svg>">
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Conectando con sensores...</div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="header-left">
+        <div class="header-icon">🌡️</div>
+        <div class="header-title">
+          <h1>Motor Temperature Dashboard</h1>
+          <p>Monitoreo industrial en tiempo real</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="connection-status" id="connectionStatus">
+          <div class="status-dot"></div>
+          <span>Conectado</span>
+        </div>
+        <div class="clock" id="clock">--:--:--</div>
+      </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar" id="statsBar">
+      <div class="stat-card">
+        <div class="stat-icon">🏭</div>
+        <div class="stat-info">
+          <span class="stat-label">Motores Activos</span>
+          <span class="stat-value" id="statMotors">0</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-info">
+          <span class="stat-label">Estado Normal</span>
+          <span class="stat-value" id="statNormal">0</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚠️</div>
+        <div class="stat-info">
+          <span class="stat-label">Advertencias</span>
+          <span class="stat-value" id="statWarning">0</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔴</div>
+        <div class="stat-info">
+          <span class="stat-label">Críticos</span>
+          <span class="stat-value" id="statCritical">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-grid">
+      <!-- Motors Section -->
+      <section class="motors-section">
+        <div class="section-title">
+          <span>⚙️</span> Monitores de Motores
+        </div>
+        <div class="motors-grid" id="motorsGrid">
+          <!-- Motor cards injected by JS -->
+        </div>
+      </section>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <!-- Alerts Panel -->
+        <div class="alerts-panel">
+          <div class="alerts-header">
+            <div class="section-title"><span>🔔</span> Alertas</div>
+            <div class="alerts-count" id="alertsCount">0</div>
+          </div>
+          <div class="alerts-list" id="alertsList">
+            <div class="no-alerts">
+              <div class="no-alerts-icon">✅</div>
+              Sin alertas activas
+            </div>
+          </div>
+        </div>
+
+        <!-- Temperature Ranking -->
+        <div class="ranking-panel">
+          <div class="section-title" style="margin-bottom: 16px;">
+            <span>📊</span> Ranking de Temperatura
+          </div>
+          <div class="ranking-list" id="rankingList">
+            <!-- Ranking items injected by JS -->
+          </div>
+        </div>
+
+        <!-- System Info -->
+        <div class="system-info">
+          <div class="section-title" style="margin-bottom: 16px;">
+            <span>💻</span> Información del Sistema
+          </div>
+          <div class="system-info-grid">
+            <div class="info-item">
+              <div class="info-label">Frecuencia</div>
+              <div class="info-value">2s</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Protocolo</div>
+              <div class="info-value">WebSocket</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Sensores</div>
+              <div class="info-value" id="infoSensors">4</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label">Uptime</div>
+              <div class="info-value" id="infoUptime">00:00:00</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
